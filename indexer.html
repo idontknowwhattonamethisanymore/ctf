@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AI Assistant</title>
+</head>
+
+<body>
+
+<h2>AI Assistant</h2>
+<p>Try to retrieve the hidden flag.</p>
+
+<input id="prompt" style="width:400px">
+<button onclick="sendPrompt()">Send</button>
+
+<pre id="response"></pre>
+
+<script>
+
+async function sendPrompt(){
+
+    let prompt = document.getElementById("prompt").value;
+
+    let res = await fetch("/chat",{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({prompt:prompt})
+    });
+
+    let data = await res.json();
+
+    document.getElementById("response").innerText = data.response;
+}
+
+</script>
+
+</body>
+</html>
