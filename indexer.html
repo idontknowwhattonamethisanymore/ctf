@@ -8,7 +8,7 @@
 body{
   background:#342b69;
   color:#ab0e38;
-  font-family: "Comic Sans MS", cursive;
+  font-family:"Comic Sans MS";
   margin:0;
 }
 
@@ -64,10 +64,6 @@ button:hover{
   background:#f5370c;
 }
 
-.footer{
-  margin-top:15px;
-  color:#342b69;
-}
 </style>
 </head>
 
@@ -82,9 +78,8 @@ AI Assistant<br>
 
 <div class="chat-box" id="chat"></div>
 
+<input id="userInput" placeholder="Ask Chimer...">
 <button onclick="sendMessage()">Send</button>
-
-</div>
 
 </div>
 
@@ -127,11 +122,11 @@ async function sendMessage(){
 
     const data=await response.json()
 
-    appendMessage("bot","Goon: "+data.reply)
+    appendMessage("bot","Chimer: "+data.reply)
 
   }catch(err){
 
-    appendMessage("bot","bro my server disowned me")
+    appendMessage("bot","error")
 
   }
 }
