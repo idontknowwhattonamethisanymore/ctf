@@ -96,6 +96,10 @@ function appendMessage(sender,text){
 <input id="userInput" type="text" />
 <button onclick="sendMessage()">Send</button>
 
+document.getElementById("userInput").addEventListener("keypress", function(e){
+  if(e.key === "Enter") sendMessage();
+});
+  
 async function sendMessage(){
 
   const input=document.getElementById("userInput")
