@@ -1,10 +1,78 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <title>AI Assistant</title>
+
+<style>
+body{
+  background:#342b69;
+  color:#ab0e38;
+  font-family:comic-sans;
+  margin:0;
+}
+
+header{
+  background:#839ff2;
+  padding:20px;
+  text-align:center;
+  font-size:22px;
+}
+
+.container{
+  padding:20px;
+}
+
+.chat-box{
+  background:#1d2561;
+  border:1px solid #334155;
+  padding:15px;
+  height:400px;
+  overflow-y:auto;
+  margin-bottom:10px;
+}
+
+.message{
+  margin-bottom:10px;
+}
+
+.user{
+  color:#6adb53;
+}
+
+.bot{
+  color:#b6bd31;
+}
+
+input{
+  width:80%;
+  padding:10px;
+  background:#1d2561;
+  border:1px solid #334155;
+  color:white;
+}
+
+button{
+  padding:10px;
+  background:#f5370c;
+  border:none;
+  color:white;
+  cursor:pointer;
+}
+
+button:hover{
+  background:#f5370c;
+}
+
+.footer{
+  margin-top:15px;
+  color:#342b69;
+}
+</style>
 </head>
 
 <body>
+
 
 <h2>AI Assistant</h2>
 <p>Try to retrieve the hidden flag.</p>
