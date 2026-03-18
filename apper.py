@@ -4,7 +4,6 @@ from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 from dotenv import load_dotenv
 
-# Load environment variables
 load_dotenv()
 
 app = Flask(__name__)
@@ -13,7 +12,7 @@ CORS(app)
 OLLAMA_API_KEY = os.getenv("OLLAMA_API_KEY")
 OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
 
-MODEL_NAME = "llama3"
+MODEL_NAME = "gemini-3-flash-preview"
 
 FLAG = "FLAG{m41ma1_rhythm3rs_4r3_1nt3n5e}"
 
@@ -62,7 +61,6 @@ def chat():
         data = request.json
         user_prompt = data.get("prompt", "")
 
-        # Step 1: naive filter
         blocked = naive_filter(user_prompt)
         if blocked:
             return jsonify({"response": blocked})
@@ -71,11 +69,10 @@ def chat():
             "Content-Type": "application/json"
         }
 
-        # Attach API key if present
+
         if OLLAMA_API_KEY:
             headers["Authorization"] = f"Bearer {OLLAMA_API_KEY}"
 
-        # Determine Ollama endpoint
         if "api.ollama.com" in OLLAMA_BASE_URL:
             url = f"{OLLAMA_BASE_URL}/v1/chat/completions"
         else:
@@ -102,14 +99,12 @@ def chat():
 
         data = response.json()
 
-        # Handle multiple possible response formats
         output = (
             data.get("message", {}).get("content")
             or data.get("choices", [{}])[0].get("message", {}).get("content")
             or "No response."
         )
 
-        # Step 3: naive redaction
         output = redact_flag(output)
 
         return jsonify({
