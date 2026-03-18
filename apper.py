@@ -42,7 +42,7 @@ def redact_flag(text: str):
 
 @app.route("/", methods=["GET"])
 def home():
-    return render_template("index.html")
+    return render_template("indexer.html")
 
 @app.route("/api/chat", methods=["POST"])
 def chat():
