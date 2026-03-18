@@ -91,6 +91,11 @@ function appendMessage(sender,text){
   chat.scrollTop=chat.scrollHeight
 }
 
+<div id="chat" class="chat-box"></div>
+
+<input id="userInput" type="text" />
+<button onclick="sendMessage()">Send</button>
+
 async function sendMessage(){
 
   const input=document.getElementById("userInput")
