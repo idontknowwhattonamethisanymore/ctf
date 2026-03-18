@@ -59,7 +59,7 @@ def chat():
     try:
 
         data = request.json
-        user_prompt = data.get("prompt", "")
+        user_prompt = data.get("message", "")
 
         blocked = naive_filter(user_prompt)
         if blocked:
