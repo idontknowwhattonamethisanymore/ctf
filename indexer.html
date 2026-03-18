@@ -11,18 +11,15 @@ body{
   font-family:"Comic Sans MS";
   margin:0;
 }
-
 header{
   background:#839ff2;
   padding:20px;
   text-align:center;
   font-size:22px;
 }
-
 .container{
   padding:20px;
 }
-
 .chat-box{
   background:#1d2561;
   border:1px solid #334155;
@@ -31,19 +28,15 @@ header{
   overflow-y:auto;
   margin-bottom:10px;
 }
-
 .message{
   margin-bottom:10px;
 }
-
 .user{
   color:#6adb53;
 }
-
 .bot{
   color:#b6bd31;
 }
-
 input{
   width:80%;
   padding:10px;
@@ -51,7 +44,6 @@ input{
   border:1px solid #334155;
   color:white;
 }
-
 button{
   padding:10px;
   background:#f5370c;
@@ -59,11 +51,9 @@ button{
   color:white;
   cursor:pointer;
 }
-
 button:hover{
   background:#f5370c;
 }
-
 </style>
 </head>
 
@@ -78,59 +68,40 @@ AI Assistant<br>
 
 <div class="chat-box" id="chat"></div>
 
-<input id="userInput">
+<input id="userInput" placeholder="Say something...">
 <button onclick="sendMessage()">Send</button>
 
 </div>
 
 <script>
-
 function appendMessage(sender,text){
-
   const chat=document.getElementById("chat")
-
   const div=document.createElement("div")
   div.className="message "+sender
   div.innerText=text
-
   chat.appendChild(div)
   chat.scrollTop=chat.scrollHeight
 }
 
 async function sendMessage(){
-
   const input=document.getElementById("userInput")
   const message=input.value.trim()
-
-  if(!message)return
-
+  if(!message) return
   appendMessage("user","You: "+message)
-
   input.value=""
-
   try{
-
     const response=await fetch("/api/chat",{
       method:"POST",
-      headers:{
-        "Content-Type":"application/json"
-      },
-      body:JSON.stringify({
-        message:message
-      })
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({ message: message })
     })
-
     const data=await response.json()
-
-    appendMessage("bot","Chimer: "+data.reply)
-
+    // backend returns { "response": "..." }
+    appendMessage("bot","Chimer: "+(data.response || data.error || "no reply"))
   }catch(err){
-
-    appendMessage("bot","error")
-
+    appendMessage("bot","error: "+err.message)
   }
 }
-
 </script>
 
 </body>
