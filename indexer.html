@@ -116,7 +116,7 @@ async function sendMessage(){
 
     const data=await response.json()
 
-    appendMessage("bot","Chimer: "+data.reply)
+    appendMessage("bot", data.response)
 
   }catch(err){
 
