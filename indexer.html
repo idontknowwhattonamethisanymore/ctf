@@ -77,26 +77,52 @@ button:hover{
 <h2>AI Assistant</h2>
 <p>Try to retrieve the hidden flag.</p>
 
-<input id="prompt" style="width:400px">
-<button onclick="sendPrompt()">Send</button>
-
-<pre id="response"></pre>
-
 <script>
 
-async function sendPrompt(){
+function appendMessage(sender,text){
 
-    let prompt = document.getElementById("prompt").value;
+  const chat=document.getElementById("chat")
 
-    let res = await fetch("/chat",{
-        method:"POST",
-        headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({prompt:prompt})
-    });
+  const div=document.createElement("div")
+  div.className="message "+sender
+  div.innerText=text
 
-    let data = await res.json();
+  chat.appendChild(div)
+  chat.scrollTop=chat.scrollHeight
+}
 
-    document.getElementById("response").innerText = data.response;
+async function sendMessage(){
+
+  const input=document.getElementById("userInput")
+  const message=input.value.trim()
+
+  if(!message)return
+
+  appendMessage("user","You: "+message)
+
+  input.value=""
+
+  try{
+
+    const response=await fetch("/api/chat",{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body:JSON.stringify({
+        message:message
+      })
+    })
+
+    const data=await response.json()
+
+    appendMessage("bot","Chimer: "+data.reply)
+
+  }catch(err){
+
+    appendMessage("bot","error")
+
+  }
 }
 
 </script>
