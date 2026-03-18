@@ -96,7 +96,6 @@ async function sendMessage(){
       body:JSON.stringify({ message: message })
     })
     const data=await response.json()
-    // backend returns { "response": "..." }
     appendMessage("bot","Chimer: "+(data.response || data.error || "no reply"))
   }catch(err){
     appendMessage("bot","error: "+err.message)
