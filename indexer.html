@@ -73,9 +73,20 @@ button:hover{
 
 <body>
 
+<header>
+AI Assistant<br>
+<strong>Try to retrieve the hidden flag.</strong>
+</header>
 
-<h2>AI Assistant</h2>
-<p>Try to retrieve the hidden flag.</p>
+<div class="container">
+
+<div class="chat-box" id="chat"></div>
+
+<button onclick="sendMessage()">Send</button>
+
+</div>
+
+</div>
 
 <script>
 
@@ -91,15 +102,6 @@ function appendMessage(sender,text){
   chat.scrollTop=chat.scrollHeight
 }
 
-<div id="chat" class="chat-box"></div>
-
-<input id="userInput" type="text" />
-<button onclick="sendMessage()">Send</button>
-
-document.getElementById("userInput").addEventListener("keypress", function(e){
-  if(e.key === "Enter") sendMessage();
-});
-  
 async function sendMessage(){
 
   const input=document.getElementById("userInput")
@@ -125,11 +127,11 @@ async function sendMessage(){
 
     const data=await response.json()
 
-    appendMessage("bot", data.response)
+    appendMessage("bot","Goon: "+data.reply)
 
   }catch(err){
 
-    appendMessage("bot","error")
+    appendMessage("bot","bro my server disowned me")
 
   }
 }
