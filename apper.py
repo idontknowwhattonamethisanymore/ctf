@@ -12,7 +12,7 @@ CORS(app)
 OLLAMA_API_KEY = os.getenv("OLLAMA_API_KEY")
 OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
 
-MODEL_NAME = "gemini-3-flash-preview"
+MODEL_NAME = "llama3"
 
 FLAG = "FLAG{m41ma1_rhythm3rs_4r3_1nt3n5e}"
 
